@@ -1,0 +1,14 @@
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\FrameProcessing.exe.config
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\FrameProcessing.exe
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\FrameProcessing.pdb
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.Imaging.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.Video.DirectShow.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.Video.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.Video.FFMPEG.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\bin\Release\AForge.Math.dll
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\obj\Release\FrameProcessing.Form1.resources
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\obj\Release\FrameProcessing.Properties.Resources.resources
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\obj\Release\FrameProcessing.csproj.GenerateResource.Cache
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\obj\Release\FrameProcessing.exe
+C:\Users\Рамиз\Documents\Visual Studio 2015\Projects\FrameProcessing\FrameProcessing\obj\Release\FrameProcessing.pdb
