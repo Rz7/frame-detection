@@ -8,6 +8,10 @@ using System.Drawing;
 
 namespace FrameProcessing
 {
+    /*
+        Data compressor is a class to keep compressed data of sets of frames
+        Thank to the class, we can anylize and compare images faster
+        */
     class DataCompressor
     {
         const float MIN_PERCENT_SIMULARITIES    = 0.70f;
@@ -16,6 +20,9 @@ namespace FrameProcessing
         /*
             The class is created to store all important information about a video that is needed to be recognized
             or to be founded as a piece of another video. All videos are stored in the DB and can be decoded in this class.
+
+            @parameters: bool(BAW)
+            @output: null
             */
         public DataCompressor(bool BAW = true)
         {
@@ -25,7 +32,10 @@ namespace FrameProcessing
         /* 
             The function is to add to the compressor a new frame,
             depending on blackAndWhite parameter, calculates essential specific date from each frame
-            and store it in the array.
+            and store it in the array
+
+            @parameters: Bitmap(newFrame)
+            @output: bool
             */
         public bool addFrame(Bitmap newFrame)
         {
@@ -60,25 +70,10 @@ namespace FrameProcessing
                 for (int i = 0; i < newFrame.Width; ++i)
                     arrayOfPixels[_s++] = newFrame.GetPixel(i, mHeight[h]).R;
 
+            // Reshape the array of pixels, if it's needed
+            // We need to have the same size of both arrays (image, video frame)
             DataCompressor.reshapeArray(ref arrayOfPixels, 1920); // 640px = width, width * 3
-
-            /*
-            // The middle value between all selected pixels in the array
-            float middleDelta = 0.0f;
-
-            // Geting middleDelta value
-            for (int i = 0; i < arrayOfPixels.Length; ++i)
-                middleDelta += arrayOfPixels[i];
-
-            middleDelta /= arrayOfPixels.Length;
-
-            for (int i = 0; i < arrayOfPixels.Length; ++i)
-                arrayOfPixels[i] -= middleDelta; */
-
-            // Check if this frame is very similar to the previous one
-            // if (DataCompressor.findSimilarities(arrayOfPixels, lastFrame, this))
-            //    return; // the frame is similar to the previous one. Skip it.
-
+           
             // Storing information about the frame
             frameCD.storedPixelsInfo = arrayOfPixels;
 
@@ -91,6 +86,9 @@ namespace FrameProcessing
         /*
             The function is to find similarities in the last and new frames.
             It helps avoid the same or very similar frames to each other.
+
+            @parameters: float[](_oneFrame), float[](_anotherFrame), DataCompressor(comp) = null
+            @output: bool
             */
         public static bool findSimilarities(float[] _oneFrame, float[] _anotherFrame, DataCompressor comp = null)
         {
@@ -102,13 +100,11 @@ namespace FrameProcessing
                 return false;
             }
 
-
             if (_oneFrame.Length > _anotherFrame.Length)
                 DataCompressor.reshapeArray(ref _oneFrame, _anotherFrame.Length);
             else if (_anotherFrame.Length > _oneFrame.Length)
                 DataCompressor.reshapeArray(ref _anotherFrame, _oneFrame.Length);
             
-
             float rightElements = 0.0f;
             float minRightElements = _anotherFrame.Length * MIN_PERCENT_SIMULARITIES;
             for (int i = 0; i < _anotherFrame.Length; ++i)
@@ -125,6 +121,9 @@ namespace FrameProcessing
 
             Reshaping array removes some of the elements of the array,
             so finally the array's size equals size (parameter)
+
+            @parameters: ref float[](array), int(size)
+            @output: ref float[](array)
             */
         public static void reshapeArray(ref float[] array, int size)
         {
@@ -145,7 +144,10 @@ namespace FrameProcessing
 
         /*
             Saving framesData to a txt file
-            At the beginning it's just for !testing! how the algorithm works.
+            At the beginning it's just for !testing! how the algorithm works
+
+            @parameters: null
+            @output: null
             */
         public void saveToFile()
         {
@@ -171,13 +173,15 @@ namespace FrameProcessing
 
         /*
             Return the array of the data
+
+            @parameters: null
+            @output: List<FrameCompressedData>
             */
         public List<FrameCompressedData> get()
         {
             return framesData;
         }
-
-
+        
         /*
             frameCompressedData structure is to keep the information of the choosen pixels of a frame in the array,
             and also some additional information about a frame, if required.

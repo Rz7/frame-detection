@@ -13,7 +13,6 @@ namespace FrameProcessing
     public partial class Form1 : Form
     {
         Thread th;
-
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +34,12 @@ namespace FrameProcessing
             FrameProcessing.stopAForge();
         }
 
+        /*
+            Update a particular pictureBox after resizing the input image
+
+            @parameters: PictureBox(pb), Bitmap(image)
+            @output: null
+            */
         private void updatePicture(PictureBox pb, Bitmap image)
         {
             int width = image.Width;
@@ -59,6 +64,12 @@ namespace FrameProcessing
         private delegate void trackBarCallback(object sender, int percent = 0);
         private delegate void labelSimilarFrameCallback(object sender, int similarFrameNumber, int seconds);
 
+        /*
+            Set the bitmap image in the picturebox for the frames of video
+
+            @parameters: object(sender), Bitmap(image)
+            @output: null
+            */
         public void setFrame(object sender, Bitmap image)
         {
             if (pictureBox1.InvokeRequired)
@@ -71,6 +82,12 @@ namespace FrameProcessing
             }
         }
 
+        /*
+            Set the bitmap image (the selected image) in the picturebox
+
+            @parameters: object(sender), Bitmap(image)
+            @output: null
+            */
         public void setImage(object sender, Bitmap image)
         {
             if (pictureBox2.InvokeRequired)
@@ -83,6 +100,13 @@ namespace FrameProcessing
             }
         }
 
+        /*
+            Set a new track bar value
+
+            
+            @parameters: object(sender), int(percent) = 0
+            @output: null
+            */
         public void setTrackBarValue(object sender, int percent = 0)
         {
             if (trackBar1.InvokeRequired)

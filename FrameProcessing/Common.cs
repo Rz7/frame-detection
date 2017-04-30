@@ -9,6 +9,10 @@ using System.Drawing;
 
 namespace FrameProcessing
 {
+    /*
+        Common is a class that offers a set of functions
+        for use in every class, they are not specific but helpful
+        */
     static class Common
     {
 

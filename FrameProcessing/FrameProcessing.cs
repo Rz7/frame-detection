@@ -14,15 +14,15 @@ using AForge.Video.FFMPEG;
 using AForge.Imaging;
 using GrayScaler = AForge.Imaging.Filters.Grayscale;
 
-
-/*
-    TODO NEXT:
-
-        1) Needs to make the same size for every video before analysis
-*/
-
 namespace FrameProcessing
 {
+    /*
+        FrameProcessing is a class to process images (or frames from videos)
+
+        The class is the main in the program; it loads a video, optimizes it,
+        and finally compares with the image that was chosen before
+        */
+
     static class FrameProcessing
     {
         static Form1 mainForm;
@@ -44,6 +44,8 @@ namespace FrameProcessing
 
         /*
             Initialisation of the class
+            @parameters: Form1(_mainForm)
+            @output: null
             */
         public static void init(Form1 _mainForm)
         {
@@ -54,6 +56,8 @@ namespace FrameProcessing
         /*
             The user picked a video,
             load main parameters about it
+            @parameters: string(path), bool(showStatistic) = false
+            @output: VideoFileReader
             */
         public static VideoFileReader loadVideo(string path, bool showStatistic = false)
         {
@@ -92,6 +96,9 @@ namespace FrameProcessing
         /*
             Loading an image and getting a bitmap of it.
             Creating a datacompressor info of the image.
+
+            @parameters: string(pathToTheFile)
+            @output: null
             */
         public static void setImage(string pathToTheFile)
         {
@@ -113,6 +120,9 @@ namespace FrameProcessing
 
         /*
             Preparing to start working with AForge and run the library
+
+            @parameters: string(pathToTheFile)
+            @output: null
             */
         public static void runVideo(string pathToTheFile)
         {
@@ -120,11 +130,23 @@ namespace FrameProcessing
             FrameProcessing.loadVideo(pathToTheFile);
         }
 
+        /*
+            Setting a frame according to the percent in the parameters
+
+            @parameters: int(pct) = 0
+            @output: null
+            */
         public static void setFrameByPercent(int pct = 0)
         {
             FrameProcessing.setFrame((int)((pct / 100.0f) * FrameProcessing.frameCount));
         }
 
+        /*
+            Setting a frame according to the number of it
+
+            @parameters: int(frameStartNumber) = 0
+            @output: null
+            */
         public static void setFrame(int frameStartNumber = 0)
         {
             if (FrameProcessing.path == null || FrameProcessing.path == "")
@@ -147,6 +169,13 @@ namespace FrameProcessing
             FrameProcessing.reader.Close();
         }
 
+        /*
+            Processing a video; generating DataCompressor information
+            Finding a similar frame to the image that was selected before
+
+            @parameters: int(frameStartNumber) = 0
+            @output: null
+            */
         public static void videoProcessing(int frameStartNumber = 0)
         {
             // frequency of checking frames
@@ -209,6 +238,9 @@ namespace FrameProcessing
 
         /*
             Getting a new frame via AForge in a video
+
+            @parameters: object(sender), NewFrameEventArgs(eventArgs)
+            @output: null
             */
         private static void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
@@ -222,17 +254,7 @@ namespace FrameProcessing
 
                 // Get a new image
                 Bitmap transformedImage = grayScale.Apply(lastImage);
-
-
-                /*
-                string msg = transformedImage.GetPixel(0, 0).R.ToString();
-                msg += Environment.NewLine + transformedImage.GetPixel(0, 0).G;
-                msg += Environment.NewLine + transformedImage.GetPixel(0, 0).B;
-
-                MessageBox.Show(msg);
-                */
-
-
+                
                 // Set the transformed image onto the pictureBox
                 mainForm.setImage(null, transformedImage);
             }
@@ -244,6 +266,9 @@ namespace FrameProcessing
 
         /*
             Start working AForge
+
+            @parameters: null
+            @output: null
             */
         public static void startAForge()
         {
@@ -253,6 +278,9 @@ namespace FrameProcessing
 
         /*
             Stop working AForge
+
+            @parameters: null
+            @output: null
             */
         public static void stopAForge()
         {
@@ -264,6 +292,9 @@ namespace FrameProcessing
         /*
             Find the image in the video and return the number of the frame
             that is similar to the image.
+
+            @parameters: null
+            @output: int(the possible similar to the image frame from the video)
             */
         public static int findSimilarities()
         {
